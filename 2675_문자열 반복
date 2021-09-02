@@ -13,8 +13,8 @@ public class Main {
                 for(int r = 0; r < values[i]; r++) {
                     System.out.print(a.charAt(j));
                 }
-
             }
+            System.out.println();
         }
     }
 }
