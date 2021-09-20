@@ -7,6 +7,7 @@ public class Main {
     static int nNum, m, min;
     static String n;
     static boolean[] check;
+    static StringTokenizer st;
     public static void main(String[] args) throws IOException {
         BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
         n = br.readLine();
@@ -14,7 +15,9 @@ public class Main {
         m = Integer.parseInt(br.readLine());
         check = new boolean[10];
         min = Integer.MAX_VALUE;
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        if(m != 0) {
+            st = new StringTokenizer(br.readLine());
+        }
         for(int i = 0; i < m; i++) {
             check[Integer.parseInt(st.nextToken())] = true;
         }
