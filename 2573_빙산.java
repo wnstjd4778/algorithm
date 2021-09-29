@@ -5,7 +5,6 @@ import java.util.*;
 public class Main {
     static int n, m, count, test;
     static int[][] arr;
-    static int[][] melting;
     static boolean[][] visited;
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
@@ -24,7 +23,6 @@ public class Main {
         while (true) {
             count = 0;
             visited = new boolean[n][m];
-            melting = new int[n][m];
             for(int i = 0; i < n; i++) {
                 for(int j = 0; j < m; j++) {
                     if(!visited[i][j] && arr[i][j] > 0) {
@@ -58,13 +56,6 @@ public class Main {
                     else dfs(tx, ty);
                 }
             }
-        }
-    }
-    static class XY {
-        int x, y;
-        XY(int x, int y) {
-            this.x = x;
-            this.y = y;
         }
     }
 }
