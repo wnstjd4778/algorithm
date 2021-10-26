@@ -29,19 +29,20 @@ public class Main {
 
             Collections.sort(students);
 
-            int index = 0;
             int bookCount = n;
-            while (index < m && bookCount > 0) {
-                Student s = students.get(index);
-                for(int i = s.start; i <= s.end; i++) {
-                    if(!check[i]) {
+            for(int i = 0; i < m; i++) {
+                Student s = students.get(i);
+                for(int j = s.start; j <= s.end; j++) {
+                    if(!check[j]) {
                         count++;
-                        check[i] = true;
                         bookCount--;
+                        check[j] = true;
                         break;
                     }
                 }
-                index++;
+                if(bookCount < 1) {
+                    break;
+                }
             }
             sb.append(count).append('\n');
         }
