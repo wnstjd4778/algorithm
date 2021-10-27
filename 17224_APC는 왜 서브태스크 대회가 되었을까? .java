@@ -34,18 +34,18 @@ public class Main {
         int ans = 0;
         for(int i = 0; i < n; i++) {
             Problem problem = problems.get(i);
-            if(problem.high <= l) {
-                ans += 140;
-                k--;
-            } else if(problem.low <= l) {
-                ans += 100;
-                k--;
-            }
-            if(k == 0) {
+            if(k > 0) {
+                if (problem.high <= l) {
+                    ans += 140;
+                    k--;
+                } else if (problem.low <= l) {
+                    ans += 100;
+                    k--;
+                }
+            } else {
                 break;
             }
         }
         System.out.println(ans);
     }
 }
-
