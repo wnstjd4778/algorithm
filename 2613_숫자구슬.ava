@@ -1,0 +1,90 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static int N, M;
+    static int[] data;
+    static List<Integer> order;
+
+    public static void main(String[] args) throws IOException {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out))) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            N = Integer.parseInt(st.nextToken());
+            M = Integer.parseInt(st.nextToken());
+            data = new int[N];
+            order = new ArrayList<>();
+            st = new StringTokenizer(br.readLine());
+            int l = 0;
+            for (int i = 0; i < N; ++i) {
+                data[i] = Integer.parseInt(st.nextToken());
+                l = Math.max(l, data[i]);
+            }
+
+            int r = 30000, ans = 0;
+            while (l <= r) {
+                int m = (l + r) >> 1;
+
+                if (isVaild(m)) {
+                    ans = m;
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }
+            }
+
+            //최대값을 넘지 않는 그룹을 만듬
+            int cnt = 0, sum = 0;
+            for (int i = 0; i < N; ++i) {
+                sum += data[i];
+                cnt++;
+                if (sum > ans) {
+                    i--;
+                    order.add(cnt - 1);
+                    cnt = 0;
+                    sum = 0;
+                } else if (sum == ans) {
+                    order.add(cnt);
+                    sum = 0;
+                    cnt = 0;
+                }
+                if (i == N - 1 && cnt > 0) {
+                    order.add(cnt);
+                }
+            }
+
+            //그룹의 수가 M보다 작으면
+            //2이상인 그룹을 1+N개로 분할
+            while (order.size() < M) {
+                for (int i = 0; i < order.size(); ++i) {
+                    if (order.get(i) > 1) {
+                        order.set(i, order.get(i) - 1);
+                        order.add(i, 1);
+                        break;
+                    }
+                }
+            }
+
+            bw.write(ans + "\n");
+            for (int v : order) {
+                bw.write(v + " ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isVaild(int v) {
+        int cnt = 0, sum = 0;
+        for (int i = 0; i < N; ++i) {
+            if (sum + data[i] <= v) {
+                sum += data[i];
+            } else {
+                if (++cnt == M) return false;
+                sum = data[i];
+            }
+        }
+        return cnt < M ;
+    }
+}
