@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int girl = Integer.parseInt(st.nextToken());
+        int boy = Integer.parseInt(st.nextToken());
+        int contest = Integer.parseInt(st.nextToken());
+
+        int cnt = 0;
+
+        while (girl - 2 >= 0 && boy - 1 >= 0 && girl + boy - 3 >= contest) {
+            girl -= 2;
+            boy--;
+            cnt++;
+        }
+        System.out.println(cnt);
+    }
+}
