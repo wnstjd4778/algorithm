@@ -38,7 +38,6 @@ public class Main {
             int ny = y + dy[i];
             if(nx >= 0 && ny >= 0 && nx < n && ny < n && arr[x][y] < arr[nx][ny]) {
                 dp[x][y] = Math.max(dp[x][y], dfs(nx, ny) + 1);
-                dfs(nx, ny);
             }
         }
         return dp[x][y];
